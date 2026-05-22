@@ -1,0 +1,266 @@
+% !TEX program = lualatex
+\documentclass[10pt,letterpaper]{article}
+
+% ===== Packages =====
+\usepackage[a4paper,left=0.45in,right=0.45in,top=0.60in,bottom=0.35in]{geometry}
+\usepackage[explicit]{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+% \usepackage{simpleicons} % for tech brand logos
+\usepackage[HTML]{xcolor}
+\usepackage{fontspec}
+
+% ===== Font =====
+\setmainfont{Lato}
+
+% ===== Spacing & Lists =====
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=*,nosep,topsep=1pt,itemsep=1pt,parsep=0pt}
+
+% ===== Colors =====
+% \definecolor{sectioncolor}{RGB}{34, 45, 65}   % deep navy
+\definecolor{linkcolor}{RGB}{0, 112, 243}     % vibrant blue
+\definecolor{sectioncolor}{HTML}{3A6EA5}
+\definecolor{links}{HTML}{424444}
+\definecolor{black}{HTML}{000000}
+
+% these are good colors u can use
+% #131277
+% #391868
+% #008080
+% #B22222
+% #9c5151
+% #4A6FA5
+% #40658e $
+% #356499 $
+% #5D6D7E
+% #0000FF
+% #3f3e40
+% #424444 $  %
+% #444246
+% #485656
+% #727676
+% #3A6EA5 ! s l %
+% #1A2A3A ! l s
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=links,
+    linkcolor=black,
+}
+
+
+% ===== Font sizes =====
+% todo: add sectionfont and titlefont
+\newcommand{\bodyfont}{\fontsize{11.5pt}{15pt}\selectfont}
+\newcommand{\tinyfont}{\fontsize{10.7pt}{14pt}\selectfont}
+\newcommand{\skillfont}{\fontsize{10.6pt}{15pt}\selectfont}
+
+% Exact font sizes for jobs
+\newcommand{\unifont}{\fontsize{12pt}{10pt}\selectfont\bfseries}  % bold, size 11pt
+\newcommand{\companyfont}{\fontsize{14pt}{14pt}\selectfont\bfseries}  % bold, size 11pt
+\newcommand{\jobdatefont}{\color{sectioncolor}\fontsize{11pt}{12pt}\selectfont}   % 10pt with 12pt baseline
+\newcommand{\joblocfont}{\color{sectioncolor}\fontsize{10pt}{11pt}\selectfont}     % 9pt with 11pt baseline
+\newcommand{\jobrolefont}{\color{sectioncolor}\fontsize{11pt}{13pt}\selectfont\itshape}
+
+% ===== Section formatting =====
+% line under version
+% \titleformat{\section}
+%     {\Large\bfseries\color{sectioncolor}}
+%     {}{0em}{}[\vspace{-0.3cm}\rule{\linewidth}{1.3pt}\vspace{0.1cm}]
+% % \titlespacing{\section}{0pt}{3.5pt}{2pt}
+% \titlespacing{\section}{0pt}{1.7pt}{2pt}
+
+\titleformat{\section}
+    {\Large\bfseries\color{sectioncolor}}
+    {}{0em}
+    % {#1\hspace{0.3cm}\titlerule*[1pc]{-}}
+    % line length, height
+    {#1\hspace{0.2cm}\leaders\hrule height 1pt \hfill\kern0pt}
+\titlespacing{\section}{0pt}{2pt}{2pt}
+
+% ===== Custom commands =====
+% change to better name
+\newcommand{\iconlink}[3]{%
+  \href{#2}{%
+    \expandafter\ifx\csname fa#1\endcsname\relax
+      \faIcon{#1}% fallback to \faIcon if direct command doesn't exist
+    \else
+      \csname fa#1\endcsname% use direct command (works for camel-case)
+    \fi
+    ~\textbf{#3}%
+  }%
+}
+
+\newcommand{\jobentry}[5][]{
+  \subsection*{
+    \if\relax\detokenize{#1}\relax
+      {\companyfont #2}% no link
+    \else
+        {\companyfont \href{#1}{#2 \tiny\faIcon{external-link-alt}}}% linked company name
+    \fi
+    \hfill {\jobdatefont #3}
+  }
+  {\jobrolefont \textit{#4}}\hfill {\joblocfont #5} \vspace{2pt}
+}
+
+\newcommand{\educationentry}[5][]{%
+  \subsection*{
+    \if\relax\detokenize{#1}\relax
+      {\unifont #2}% no link
+    \else
+      {\unifont \href{#1}{#2 }}% linked University name
+    \fi
+    \hfill {\jobdatefont #3}
+  }
+  {\jobrolefont \textit{#4}}\hfill {\joblocfont #5}%
+}
+
+\newcommand{\contributionentry}[4][]{%
+  \if\relax\detokenize{#1}\relax
+    #2% no link
+  \else
+      \tinyfont{\href{#1}{#2}}% linked name
+  \fi
+\ — #3 \hfill {\jobdatefont\bfseries #4} \\
+}
+
+
+% ===== Adjust subsection spacing =====
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-7pt}  % space before (negative removes extra)
+  {3pt}   % space after
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% ===== Header =====
+\newcommand{\makeheader}{
+  \begin{center}
+    \vspace*{-1cm}
+    {\color{sectioncolor}\Huge\textbf{John Doe}}\\[0.4cm]
+    {\color{sectioncolor}\fontsize{15pt}{22pt}\selectfont \textit{Software Engineer}}\\[0.4cm]
+    \iconlink{map-marker-alt}{https://www.google.com/maps/place/Tehran,+Tehran+Province,+Iran/@35.7075737,51.3476552,57472m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3f8e00491ff3dcd9:0xf0b3697c567024bc!8m2!3d35.7218583!4d51.3346954!16zL20vMGZ0bHg?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw\%3D\%3D}{San Francisco, CA, USA} \quad
+    \iconlink{phone}{tel:+1 xxx xxx xxxx}{+1 xxx xxx xxxx} \quad
+    \iconlink{envelope}{mailto:john@gmail.com}{john@gmail.com} \quad
+    \iconlink{linkedin}{https://linkedin.com/in/john}{} \quad
+    \iconlink{github}{https://github.com/john}{} \quad
+    \iconlink{StackOverflow}{https://stackoverflow.com/john}{}
+  \end{center}
+  \vspace{-0.6cm}  % single adjustment after header
+}
+
+% ===== Document =====
+\begin{document}
+
+% remove page number
+\pagestyle{empty}
+
+\raggedbottom
+% ----- Header with icons (using fontawesome5) -----
+\setlist{nosep, leftmargin=*, label=\textbullet}
+
+\makeheader
+\enlargethispage{\baselineskip}   % gives one extra line of room (remove if you don't want single page cv)
+
+% ===== Summary =====
+% summary with logo
+% \section{{\large\faIcon{user-circle}}~~Summary}
+% \section{{\large\faIcon[scale=1.2]{user-circle}}~~Summary}
+\section{Summary}
+\noindent
+{\bodyfont
+    \begingroup
+        \renewcommand{\baselinestretch}{0.9}\selectfont
+        \textbf{Software Engineer} with \textbf{3+ years of experience} building \textbf{distributed systems} and \textbf{microservices} in \textbf{Go} and \textbf{Python}. Worked on \textbf{high-traffic social media} and \textbf{fintech platforms} using \textbf{gRPC}, \textbf{Kafka}, \textbf{RabbitMQ}, \textbf{PostgreSQL}, \textbf{Redis}, \textbf{Docker}, and \textbf{Kubernetes}. Strong background in \textbf{scalable backend architecture}, \textbf{performance optimization}, and \textbf{production infrastructure}. Active \textbf{open-source contributor}.
+        \par
+    \endgroup
+}
+
+% ===== Skills =====
+\section{Skills}
+\skillfont{
+  \textbf{Backend/API:} Microservices, FastAPI, gRPC, REST, GraphQL \quad\quad 
+  \textbf{Os/Infrastructure:} Docker, Kubernetes, Linux, Git \\ 
+  \textbf{Data:} SQL, PostgreSQL, MySQL, Redis, Kafka, RabbitMQ \hspace{34pt}    
+  \textbf{Languages:} C++, Python, Go, Bash 
+}
+
+% ===== Skills With logo =====
+% \section{\faIcon{cogs}~~Skills}
+% \section{{\large\faIcon{cogs}}~~Skills}
+% \begingroup\bfseries\color{sectioncolor}
+% \noindent
+% \makebox[\linewidth][c]{%
+% \begin{tabular}{@{}*{8}{c}@{}}
+%     \simpleicon{python} Python &
+%     \simpleicon{go} Go &
+%     \simpleicon{docker} Docker &
+%     \simpleicon{apachekafka} Kafka &
+%     \faIcon{database} SQL &
+%     \simpleicon{mysql} MySQL &
+%     \simpleicon{git} Git &
+%     \simpleicon{grpc} gRPC \\
+%     \simpleicon{fastapi} FastAPI &
+%     \simpleicon{gnubash} Bash &
+%     \simpleicon{kubernetes} Kubernetes &
+%     \simpleicon{rabbitmq} RabbitMQ &
+%     \simpleicon{redis} Redis &
+%     \simpleicon{postgresql} PostgreSQL &
+%     \simpleicon{rest} REST &
+%     \simpleicon{graphql} GraphQL \\
+% \end{tabular}%
+% }
+% \endgroup
+
+
+% ===== Professional Experience =====
+% \section{{\large\faIcon{briefcase}}~~Professional Experience}
+\section{Professional Experience}
+\jobentry[https://openai.com]{OpenAI}{Jan 2026 -- Present}{Software Engineer}{San Francisco, CA, USA}
+
+{\bodyfont
+\begin{itemize}[leftmargin=*,label=\textbullet]
+    \item Developed \textbf{efficient attention kernels} in \textbf{Triton and CUDA}, achieving \textbf{25\% inference speedup} for GPT-4 class models.
+    \item Created \textbf{RLHF data curation pipelines} with \textbf{scale-out Python services}, handling \textbf{100M+ preference comparisons} weekly.
+    \item Integrated \textbf{model guardrails} via \textbf{structured output parsing}, reducing \textbf{unsafe response rate by 58\%} in production API.
+\end{itemize}
+}
+
+\jobentry[https://google.com]{Google}{Apr 2024 -- Jan 2026}{Software Engineer}{Mountain View, CA, USA}
+
+{\bodyfont
+\begin{itemize}[leftmargin=*,label=\textbullet]
+   \item Designed \textbf{scalable backend services} in \textbf{C++ and Borg} handling 50K+ \textbf{QPS} for Search Ads, maintaining 99.99\% availability.
+    \item Led migration of \textbf{legacy MapReduce jobs} to \textbf{Beam/Dataflow}, reducing \textbf{processing cost by 40\%} for petabyte-scale logs.
+    \item Built \textbf{A/B testing framework} integrated with \textbf{Spanner}, accelerating feature rollout velocity by \textbf{3 sprint cycles per quarter}.
+    \item Implemented \textbf{anomaly detection system} for \textbf{YouTube CDN traffic} using \textbf{Flink streaming}, detecting outliers within \textbf{200ms}.
+    \item Created \textbf{internal developer tool} to visualize \textbf{service dependencies} across \textbf{10k+ microservices}, cutting \textbf{debugging time by 60\%}.
+\end{itemize}
+}
+
+\jobentry[https://tesla.com]{Tesla}{Feb 2023 -- Apr 2024}{Software Engineer}{Palo Alto, CA, USA}
+
+{\bodyfont
+\begin{itemize}[leftmargin=*,label=\textbullet]
+    \item Optimized \textbf{real-time telemetry pipelines} for vehicle fleet data, reducing \textbf{latency by 32\%} and improving over-the-air diagnostic accuracy.
+    \item Implemented \textbf{Python-based simulation tools} for Autopilot edge cases, enabling \textbf{10x faster regression testing} of perception models.
+    \item Refactored \textbf{embedded Linux modules} for infotainment system, cutting \textbf{boot time by 1.8 seconds} across 2M+ vehicles.
+\end{itemize}
+}
+
+% ===== Education =====
+% \section{{\large\faIcon{graduation-cap}}~~Education}
+\section{Education}
+\educationentry{B.S. in Computer Science}{Sep 2018 -- Sep 2023}{Stanford University}{Stanford, CA, USA}
+
+% ===== Open Source Contributions =====
+% \section{{\large\faIcon{hands-helping}}~~Contributions}
+\section{Contributions}
+\contributionentry[https://github.com/docker]{docker \#345}{Added tests to improve code reliability and prevent regressions.}{Sep 2022}
+\contributionentry[https://github.com/google/go-github]{google/go-github \#258}{Fixed race conition error.}{Jan 2021}
+
+\vspace*{-\baselineskip}
+\end{document}

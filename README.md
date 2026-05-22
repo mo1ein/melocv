@@ -1,0 +1,39 @@
+# simple cv choose a good name
+After playing with tons of fancy CV generator shits, I decided to write a simple, readable and beautiful template with full control from scratch using `TeX`.
+
+[images](dfdjfk)
+
+## Installation
+
+Install [**TeX Live**](https://tug.org/texlive). 
+
+### Linux 
+
+```bash
+sudo apt install texlive
+```
+
+### Mac
+
+// todo
+
+### Windows
+
+Install [**MiKTeX** ](https://miktex.org)
+
+The **LuaLaTeX** engine included in most distributions.
+
+## Run
+I'm using `lualatex` and `vimtex` neovim plugin.
+```
+lualatex template.tex
+pdflatex template.tex                    
+xelatex template.tex                     
+latexmk -pdf -lualatex template.tex      
+```
+
+## Contributation
+Feel free to add features or fix bugs. Just open an **issue** or **PR**.
+
+Enjoy! 🥂
+
