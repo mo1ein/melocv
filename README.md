@@ -1,4 +1,4 @@
-# simple cv choose a good name
+# melo CV
 After playing with tons of fancy CV generator shits, I decided to write a simple, readable and beautiful template with full control from scratch using `TeX`.
 
 [images](dfdjfk)
