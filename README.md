@@ -24,11 +24,14 @@ Install [**MiKTeX** ](https://miktex.org)
 The **LuaLaTeX** engine included in most distributions.
 
 ## Run
-I'm using `lualatex` and `vimtex` neovim plugin.
+I'm using `lualatex` and [`vimtex`](https://github.com/lervag/vimtex) neovim plugin.
 ```
 lualatex template.tex
+# or
 pdflatex template.tex                    
+# or
 xelatex template.tex                     
+# or
 latexmk -pdf -lualatex template.tex      
 ```
 
