@@ -1,7 +1,11 @@
 # melo CV
 After playing with tons of fancy CV generator shits, I decided to write a simple, readable and beautiful template with full control from scratch using `TeX`.
 
-[images](dfdjfk)
+<p align="center">
+  <img src="cv.png" width="600">
+</p>
+
+[PDF](./cv.pdf) version.
 
 ## Installation
 
