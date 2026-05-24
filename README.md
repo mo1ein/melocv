@@ -32,13 +32,13 @@ Install [**MiKTeX** ](https://miktex.org)
 ## Run
 I'm using `lualatex` and [`vimtex`](https://github.com/lervag/vimtex) neovim plugin.
 ```bash
-lualatex template.tex
+lualatex cv.tex
 # or
-pdflatex template.tex                    
+pdflatex cv.tex                    
 # or
-xelatex template.tex                     
+xelatex cv.tex                     
 # or
-latexmk -pdf -lualatex template.tex      
+latexmk -pdf -lualatex cv.tex      
 ```
 
 ## Contributation
