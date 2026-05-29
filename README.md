@@ -1,9 +1,11 @@
 # melo CV
 After playing with tons of fancy CV generator shits, I decided to write a simple, readable and beautiful template with full control from scratch using `TeX`.
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-  <img src="cvwithphoto.png" width="400" />
-  <img src="cv.png" width="400" />
+<div style="width: 100%; text-align: center;">
+  <div style="display: inline-flex; gap: 10px; align-items: center;">
+    <img src="cvwithphoto.png" width="400" style="display:block;" />
+    <img src="cv.png" width="400" style="display:block;" />
+  </div>
 </div>
 
 [PDF](./cv.pdf) version.
