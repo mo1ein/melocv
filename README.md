@@ -1,9 +1,10 @@
 # melo CV
 After playing with tons of fancy CV generator shits, I decided to write a simple, readable and beautiful template with full control from scratch using `TeX`.
 
-<p align="center">
-  <img src="cv.png" width="600">
-</p>
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+  <img src="cvwithphoto.png" width="400" />
+  <img src="cv.png" width="400" />
+</div>
 
 [PDF](./cv.pdf) version.
 
@@ -39,6 +40,12 @@ pdflatex cv.tex
 xelatex cv.tex                     
 # or
 latexmk -pdf -lualatex cv.tex      
+```
+
+If you want to convert pdf to image, use this command:
+
+```bash
+pdftoppm -png -r 300 cv.pdf output
 ```
 
 ## Contributation

@@ -1,9 +1,13 @@
 
+# editor shits
+.nvimlog
+
 *.aux
 *.fls
 *.log
 *.out
 *.fdb_latexmk
 *.gz
+*.synctex(busy)
 
 todo.md

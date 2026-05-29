@@ -10,6 +10,10 @@
 % \usepackage{simpleicons} % for tech brand logos
 \usepackage[HTML]{xcolor}
 \usepackage{fontspec}
+\usepackage{graphicx}   % for images
+\usepackage{tikz}       % for clipping and borders
+\usepackage{etoolbox}   % for string comparison
+\usetikzlibrary{calc}
 
 % ===== Font =====
 \setmainfont{Lato}
@@ -81,6 +85,33 @@
     {#1\hspace{0.2cm}\leaders\hrule height 1pt \hfill\kern0pt}
 \titlespacing{\section}{0pt}{2pt}{2pt}
 
+
+% ===== Profile Image Command =====
+% ===== Profile photo =====
+\newcommand{\profilecircle}[5][2.55cm]{%
+  % #1 = circle size
+  % #2 = image
+  % #3 = zoom factor (1.0, 1.2, 1.5...)
+  % #4 = x shift
+  % #5 = y shift
+  \pgfmathsetlengthmacro{\picsize}{#3*#1}
+  \pgfmathsetlengthmacro{\circr}{0.5*#1-2.2pt}
+
+  \begin{tikzpicture}
+    \clip (0,0) circle[radius=\circr];
+    \node[inner sep=0pt, anchor=center, xshift=#4, yshift=#5] at (0,0) {%
+      \includegraphics[width=\picsize,keepaspectratio]{#2}%
+    };
+
+    \draw[
+      circle,
+      draw=sectioncolor!90!black,
+      line width=1.15pt
+    ] (0,0) circle[radius=\circr];
+  \end{tikzpicture}%
+}
+
+
 % ===== Custom commands =====
 % change to better name
 \newcommand{\iconlink}[3]{%
@@ -140,17 +171,46 @@
 \newcommand{\makeheader}{
   \begin{center}
     \vspace*{-1cm}
-    {\color{sectioncolor}\Huge\textbf{John Doe}}\\[0.4cm]
+    {\color{sectioncolor}\Huge\textbf{Renate Reinsve}}\\[0.4cm]
     {\color{sectioncolor}\fontsize{15pt}{22pt}\selectfont \textit{Software Engineer}}\\[0.4cm]
     \iconlink{map-marker-alt}{https://www.google.com/maps/place/Tehran,+Tehran+Province,+Iran/@35.7075737,51.3476552,57472m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3f8e00491ff3dcd9:0xf0b3697c567024bc!8m2!3d35.7218583!4d51.3346954!16zL20vMGZ0bHg?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw\%3D\%3D}{San Francisco, CA, USA} \quad
     \iconlink{phone}{tel:+1 xxx xxx xxxx}{+1 xxx xxx xxxx} \quad
     \iconlink{envelope}{mailto:john@gmail.com}{john@gmail.com} \quad
     \iconlink{linkedin}{https://linkedin.com/in/john}{} \quad
     \iconlink{github}{https://github.com/john}{} \quad
-    \iconlink{StackOverflow}{https://stackoverflow.com/john}{}
+    \iconlink{StackOverflow}{https://stackoverflow.com/john}{} \quad
+    \iconlink{User}{https://linkedin.com/in/john}{Portfolio}
   \end{center}
   \vspace{-0.6cm}  % single adjustment after header
 }
+
+
+\newcommand{\makeheaderwithphoto}[1]{%
+  \noindent
+  \begin{minipage}[c]{0.17\textwidth}
+    \centering
+    \vspace{-0.2cm}
+    \profilecircle[3cm]{#1}{1}{0cm}{0cm}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[c]{0.80\textwidth}
+    \raggedright
+    \vspace{-0.5cm}
+    {\color{sectioncolor}\Huge\textbf{Renate Reinsve}}\\[0.30cm]
+    {\color{sectioncolor}\fontsize{15pt}{18pt}\selectfont\itshape Software Engineer}\\[0.50cm]
+    {\small
+      \iconlink{map-marker-alt}{https://www.google.com/maps/place/Tehran,+Tehran+Province,+Iran/@35.7075737,51.3476552,57472m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3f8e00491ff3dcd9:0xf0b3697c567024bc!8m2!3d35.7218583!4d51.3346954!16zL20vMGZ0bHg?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw\%3D\%3D}{Oslo, Norway} \quad
+      \iconlink{phone}{tel:+1 xxx xxx xxxx}{+1 xxx xxx xxxx} \quad
+      \iconlink{envelope}{mailto:john@gmail.com}{john@gmail.com} \quad
+      \iconlink{linkedin}{https://linkedin.com/in/john}{LinkedIn} \quad
+      \iconlink{github}{https://github.com/john}{GitHub} \quad
+      \iconlink{User}{https://linkedin.com/in/john}{Portfolio}
+    }
+  \end{minipage}
+
+  \vspace{0.10cm}
+}
+
 
 % ===== Document =====
 \begin{document}
@@ -163,6 +223,10 @@
 \setlist{nosep, leftmargin=*, label=\textbullet}
 
 \makeheader
+% if you are using photo, use this header
+% \makeheaderwithphoto{your_image_path.jpg}
+
+
 \enlargethispage{\baselineskip}   % gives one extra line of room (remove if you don't want single page cv)
 
 % ===== Summary =====
@@ -173,9 +237,9 @@
 \noindent
 {\bodyfont
     \begingroup
-        \renewcommand{\baselinestretch}{0.9}\selectfont
-        \textbf{Software Engineer} with \textbf{3+ years of experience} building \textbf{distributed systems} and \textbf{microservices} in \textbf{Go} and \textbf{Python}. Worked on \textbf{high-traffic social media} and \textbf{fintech platforms} using \textbf{gRPC}, \textbf{Kafka}, \textbf{RabbitMQ}, \textbf{PostgreSQL}, \textbf{Redis}, \textbf{Docker}, and \textbf{Kubernetes}. Strong background in \textbf{scalable backend architecture}, \textbf{performance optimization}, and \textbf{production infrastructure}. Active \textbf{open-source contributor}.
-        \par
+     \renewcommand{\baselinestretch}{0.9}\selectfont
+        Software Engineer with 3+ years of experience building distributed systems and microservices in Go and Python. Worked on high-traffic social media and fintech platforms using gRPC, Kafka, RabbitMQ, PostgreSQL, Redis, Docker, and Kubernetes. Strong background in scalable backend architecture, performance optimization, and production infrastructure. Active open-source contributor.
+    \par
     \endgroup
 }
 
@@ -260,7 +324,7 @@
 % \section{{\large\faIcon{hands-helping}}~~Contributions}
 \section{Contributions}
 \contributionentry[https://github.com/docker]{docker \#345}{Added tests to improve code reliability and prevent regressions.}{Sep 2022}
-\contributionentry[https://github.com/google/go-github]{google/go-github \#258}{Fixed race conition error.}{Jan 2021}
+\contributionentry[https://github.com/google/go-github]{google/go-github \#258}{Fixed race condition error.}{Jan 2021}
 
 \vspace*{-\baselineskip}
 \end{document}
