@@ -130,7 +130,7 @@
     \if\relax\detokenize{#1}\relax
       {\companyfont #2}% no link
     \else
-        {\companyfont \href{#1}{#2 \tiny\faIcon{external-link-alt}}}% linked company name
+        {\companyfont \href{#1}{\texorpdfstring{#2 \tiny\faIcon{external-link-alt}}{#2}}} % linked company name
     \fi
     \hfill {\jobdatefont #3}
   }
