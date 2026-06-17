@@ -8,7 +8,7 @@ After playing with tons of fancy CV generator shits, I decided to write a simple
   </div>
 </div>
 
-[PDF](./cv.pdf) version.
+[PDF](./cv.pdf) and [Google doc](https://docs.google.com/document/d/e/2PACX-1vRhvvWFkinbBzn9if9cPGg9BA3tjF_1vH7ufnIvsObycj0qKCRjuZq7IhHQ4MgSPw/pub) versions.
 
 ## Installation
 
