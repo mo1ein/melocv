@@ -2,7 +2,12 @@
 \documentclass[10pt,letterpaper]{article}
 
 % ===== Packages =====
-\usepackage[a4paper,left=0.45in,right=0.45in,top=0.60in,bottom=0.35in]{geometry}
+% this sizes is for without photo
+\usepackage[a4paper,left=0.45in,right=0.45in,top=0.80in,bottom=0.35in]{geometry}
+
+% this sizes is for with photo
+% \usepackage[a4paper,left=0.45in,right=0.45in,top=0.60in,bottom=0.35in]{geometry}
+
 \usepackage[explicit]{titlesec}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -21,7 +26,7 @@
 % ===== Spacing & Lists =====
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\setlist[itemize]{leftmargin=*,nosep,topsep=1pt,itemsep=1pt,parsep=0pt}
+\setlist[itemize]{leftmargin=0.9cm,nosep,topsep=1pt,itemsep=1pt,parsep=0pt}
 
 % ===== Colors =====
 % \definecolor{sectioncolor}{RGB}{34, 45, 65}   % deep navy
@@ -57,14 +62,14 @@
 
 
 % ===== Font sizes =====
-% todo: add sectionfont and titlefont
-\newcommand{\bodyfont}{\fontsize{11.5pt}{15pt}\selectfont}
+\newcommand{\bodyfont}{\fontsize{11.7pt}{14.5pt}\selectfont}
+\newcommand{\sectionfont}{\fontsize{13pt}{15pt}\selectfont}
 \newcommand{\tinyfont}{\fontsize{10.7pt}{14pt}\selectfont}
-\newcommand{\skillfont}{\fontsize{10.6pt}{15pt}\selectfont}
+\newcommand{\skillfont}{\fontsize{11pt}{15pt}\selectfont}
 
 % Exact font sizes for jobs
 \newcommand{\unifont}{\fontsize{12pt}{10pt}\selectfont\bfseries}  % bold, size 11pt
-\newcommand{\companyfont}{\fontsize{14pt}{14pt}\selectfont\bfseries}  % bold, size 11pt
+\newcommand{\companyfont}{\fontsize{13pt}{15pt}\selectfont\bfseries}  % bold, size 11pt
 \newcommand{\jobdatefont}{\color{sectioncolor}\fontsize{11pt}{12pt}\selectfont}   % 10pt with 12pt baseline
 \newcommand{\joblocfont}{\color{sectioncolor}\fontsize{10pt}{11pt}\selectfont}     % 9pt with 11pt baseline
 \newcommand{\jobrolefont}{\color{sectioncolor}\fontsize{11pt}{13pt}\selectfont\itshape}
@@ -78,7 +83,7 @@
 % \titlespacing{\section}{0pt}{1.7pt}{2pt}
 
 \titleformat{\section}
-    {\Large\bfseries\color{sectioncolor}}
+    {\sectionfont\bfseries\color{sectioncolor}}
     {}{0em}
     % {#1\hspace{0.3cm}\titlerule*[1pc]{-}}
     % line length, height
@@ -125,6 +130,10 @@
   }%
 }
 
+\newcommand{\skillentry}[2]{%
+  \item {\skillfont\makebox[4.5cm][l]{#1:} #2}
+}
+
 \newcommand{\jobentry}[5][]{
   \subsection*{
     \if\relax\detokenize{#1}\relax
@@ -149,15 +158,6 @@
   {\jobrolefont \textit{#4}}\hfill {\joblocfont #5}%
 }
 
-\newcommand{\contributionentry}[4][]{%
-  \if\relax\detokenize{#1}\relax
-    #2% no link
-  \else
-      \tinyfont{\href{#1}{#2}}% linked name
-  \fi
-\ — #3 \hfill {\jobdatefont\bfseries #4} \\
-}
-
 
 % ===== Adjust subsection spacing =====
 \makeatletter
@@ -170,7 +170,7 @@
 % ===== Header =====
 \newcommand{\makeheader}{
   \begin{center}
-    \vspace*{-1cm}
+    \vspace*{-1.50cm}
     {\color{sectioncolor}\Huge\textbf{Renate Reinsve}}\\[0.4cm]
     {\color{sectioncolor}\fontsize{15pt}{22pt}\selectfont \textit{Software Engineer}}\\[0.4cm]
     \iconlink{map-marker-alt}{https://www.google.com/maps/place/Tehran,+Tehran+Province,+Iran/@35.7075737,51.3476552,57472m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3f8e00491ff3dcd9:0xf0b3697c567024bc!8m2!3d35.7218583!4d51.3346954!16zL20vMGZ0bHg?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw\%3D\%3D}{San Francisco, CA, USA} \quad
@@ -181,7 +181,7 @@
     \iconlink{StackOverflow}{https://stackoverflow.com/john}{} \quad
     \iconlink{User}{https://linkedin.com/in/john}{Portfolio}
   \end{center}
-  \vspace{-0.6cm}  % single adjustment after header
+  \vspace{-0.2cm}  % single adjustment after header
 }
 
 
@@ -245,12 +245,12 @@
 
 % ===== Skills =====
 \section{Skills}
-\skillfont{
-  \textbf{Backend/API:} Microservices, FastAPI, gRPC, REST, GraphQL \quad\quad 
-  \textbf{Os/Infrastructure:} Docker, Kubernetes, Linux, Git \\ 
-  \textbf{Data:} SQL, PostgreSQL, MySQL, Redis, Kafka, RabbitMQ \hspace{34pt}    
-  \textbf{Languages:} C++, Python, Go, Bash 
-}
+\begin{itemize}
+  \skillentry{Languages}{C++, Python, Go, Bash }
+  \skillentry{Backend/API}{Microservices, FastAPI, gRPC, REST, GraphQL}
+  \skillentry{Cloud \& Infrastructure}{AWS, GCP, Linux, Docker, Kubernetes, Git, Grafana, Sentry}
+  \skillentry{Soft Skills}{Problem-solving, Cross-functional Collaboration, Ownership, Teamwork}
+\end{itemize}
 
 % ===== Skills With logo =====
 % \section{\faIcon{cogs}~~Skills}
@@ -286,7 +286,7 @@
 \jobentry[https://openai.com]{OpenAI}{Jan 2026 -- Present}{Software Engineer}{San Francisco, CA, USA}
 
 {\bodyfont
-\begin{itemize}[leftmargin=*,label=\textbullet]
+\begin{itemize}    
     \item Developed \textbf{efficient attention kernels} in \textbf{Triton and CUDA}, achieving \textbf{25\% inference speedup} for GPT-4 class models.
     \item Created \textbf{RLHF data curation pipelines} with \textbf{scale-out Python services}, handling \textbf{100M+ preference comparisons} weekly.
     \item Integrated \textbf{model guardrails} via \textbf{structured output parsing}, reducing \textbf{unsafe response rate by 58\%} in production API.
@@ -296,8 +296,8 @@
 \jobentry[https://google.com]{Google}{Apr 2024 -- Jan 2026}{Software Engineer}{Mountain View, CA, USA}
 
 {\bodyfont
-\begin{itemize}[leftmargin=*,label=\textbullet]
-   \item Designed \textbf{scalable backend services} in \textbf{C++ and Borg} handling 50K+ \textbf{QPS} for Search Ads, maintaining 99.99\% availability.
+\begin{itemize}   
+    \item Designed \textbf{scalable backend services} in \textbf{C++ and Borg} handling 50K+ \textbf{QPS} for Search Ads, maintaining 99.99\% availability.
     \item Led migration of \textbf{legacy MapReduce jobs} to \textbf{Beam/Dataflow}, reducing \textbf{processing cost by 40\%} for petabyte-scale logs.
     \item Built \textbf{A/B testing framework} integrated with \textbf{Spanner}, accelerating feature rollout velocity by \textbf{3 sprint cycles per quarter}.
     \item Implemented \textbf{anomaly detection system} for \textbf{YouTube CDN traffic} using \textbf{Flink streaming}, detecting outliers within \textbf{200ms}.
@@ -308,23 +308,30 @@
 \jobentry[https://tesla.com]{Tesla}{Feb 2023 -- Apr 2024}{Software Engineer}{Palo Alto, CA, USA}
 
 {\bodyfont
-\begin{itemize}[leftmargin=*,label=\textbullet]
+\begin{itemize}    
     \item Optimized \textbf{real-time telemetry pipelines} for vehicle fleet data, reducing \textbf{latency by 32\%} and improving over-the-air diagnostic accuracy.
     \item Implemented \textbf{Python-based simulation tools} for Autopilot edge cases, enabling \textbf{10x faster regression testing} of perception models.
     \item Refactored \textbf{embedded Linux modules} for infotainment system, cutting \textbf{boot time by 1.8 seconds} across 2M+ vehicles.
 \end{itemize}
 }
 
+% ===== Open Source Contributions =====
+% \section{{\large\faIcon{hands-helping}}~~Contributions}
+\section{Contributions}
+
+{\bodyfont
+\begin{itemize}    
+    \item \tinyfont{\underline{\href{https://github.com/docker}{docker \#345}}} — Added tests to improve code reliability and prevent regressions.
+    \item \tinyfont{\underline{\href{https://github.com/google/go-github}{google/go-github \#258}}} — Fixed race condition error.
+\end{itemize}
+}
+
+\vspace{4pt}
+
 % ===== Education =====
 % \section{{\large\faIcon{graduation-cap}}~~Education}
 \section{Education}
 \educationentry{B.S. in Computer Science}{Sep 2018 -- Sep 2023}{Stanford University}{Stanford, CA, USA}
-
-% ===== Open Source Contributions =====
-% \section{{\large\faIcon{hands-helping}}~~Contributions}
-\section{Contributions}
-\contributionentry[https://github.com/docker]{docker \#345}{Added tests to improve code reliability and prevent regressions.}{Sep 2022}
-\contributionentry[https://github.com/google/go-github]{google/go-github \#258}{Fixed race condition error.}{Jan 2021}
 
 \vspace*{-\baselineskip}
 \end{document}
